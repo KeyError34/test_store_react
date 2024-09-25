@@ -3,22 +3,25 @@ import { NavLink } from 'react-router-dom';
 
 function myActive(isActive) {
   return {
-    color: isActive ? 'red' : 'black',
-    opacity: isActive ? 0.6 : 1,
+    color: isActive ? '#5ce6ff' : '#FFFFFF',
+      opacity: isActive ? 0.6 : 1,
+     fontSize: '15px',
+      fontWeight: '600', 
+
   };
 }
 
 function Nav() {
   return (
-    <nav>
-      <NavLink to="/home" style={({ isActive }) => myActive(isActive)}>
-        store
+    <nav className={styles.navContainer}>
+      <NavLink to="/" style={({ isActive }) => myActive(isActive)}>
+        Store
       </NavLink>
-      <NavLink to="/basket" style={({ isActive }) => myActive(isActive)}>
-        basket
+      <NavLink  to="/basket" style={({ isActive }) => myActive(isActive)}>
+        Basket
       </NavLink>
       <NavLink to="/contacts" style={({ isActive }) => myActive(isActive)}>
-        contacts
+        Contacts
       </NavLink>
     </nav>
   );

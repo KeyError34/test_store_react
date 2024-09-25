@@ -1,5 +1,8 @@
 import styles from './styles.module.scss';
+import Header from '../../components/header';
 function Home() {
-  return <></>;
+  return <>
+  <Header/>
+  </>;
 }
 export default Home;
