@@ -71,9 +71,9 @@ function Footer() {
       </ul>
       <ul className={styles.socialContainer}>
         <li>
-          {social_media.map(item => {
-            return <img key={item.id} src={item.url} alt={item.name} />;
-          })}
+          {/*{social_media.map(item => {*/}
+          {/*  return <img key={item.id} src={item.url} alt={item.name} />;*/}
+          {/*})}*/}
         </li>
         <li>
           <form onSubmit={handleSubmit(onSubmit)}>

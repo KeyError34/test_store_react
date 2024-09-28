@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GoodsApi } from '../../services/goods-service';
 export const FETCH_GOODS_REQUEST = 'FETCH_GOODS_REQUEST';
 export const FETCH_GOODS_SUCCESS = 'FETCH_GOODS_SUCCESS';
 export const FETCH_GOODS_FAILURE = 'FETCH_GOODS_FAILURE';
@@ -30,9 +31,7 @@ export const fetchGoods = () => {
   return async dispatch => {
     dispatch(fetchGoodsRequest());
     try {
-      const response = await axios.get(
-        'https://66ced668901aab24841fc54d.mockapi.io/productData'
-      );
+      const response = await GoodsApi.fetchGoods();
       dispatch(fetchGoodsSuccess(response.data));
     } catch (error) {
       dispatch(fetchGoodsFailure(error.message));
