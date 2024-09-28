@@ -8,7 +8,7 @@ function CardList  ({ items, handleClick, btnName , children}) {
         <Card
           key={item.id}
           item={item}
-          handleClick={handleClick(item)}
+          handleClick={handleClick}
           btnName={btnName}
         />
       ))}
