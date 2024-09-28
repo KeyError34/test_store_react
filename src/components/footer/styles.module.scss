@@ -30,6 +30,10 @@
     img {
       max-width: 32px;
       max-height: 32px;
+      &:hover{
+        box-shadow: 1px 1px 5px 2px $primary_color_light;
+        
+      }
     }
     @media (max-width: 600px) {
       justify-content: flex-start;
@@ -43,6 +47,12 @@
       border-bottom: 1px solid $primary_color_light;
       opacity: 0.5;
       color: $primary_color_light;
+      padding: 5px;
+      &:hover{
+       outline: 1px solid $primary_color_light;
+       background-color:$primary_color_light ;
+       color: $primary_color_dark;
+      }
     }
   }
   .privacyContainer {

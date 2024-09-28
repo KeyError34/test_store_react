@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import social_media from '../../images/sotialmadia';
 import styles from './styles.module.scss';
 import emailjs from '@emailjs/browser';
@@ -78,7 +78,7 @@ function Footer() {
         <li>
           <form onSubmit={handleSubmit(onSubmit)}>
             {errors.email && (
-              <p style={{ color: 'rgb(228 8 8 )' , opacity:"0.5"}}>
+              <p style={{ color: '#eb1052', opacity: '0.5',fontWeight:"600" }}>
                 {errors.email.message}
               </p>
             )}
@@ -86,7 +86,7 @@ function Footer() {
               type="email"
               placeholder="Enter your email"
               {...register('email', {
-                required: 'Email is required',
+                required: true,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: 'Invalid email address',
