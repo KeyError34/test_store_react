@@ -29,6 +29,7 @@ const shopReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error:null,
       };
     case FETCH_GOODS_SUCCESS:
       return {

@@ -73,10 +73,48 @@ export const removeFromBasketFailure = error => ({
   payload: error,
 });
 // Добавление в корзину
+// export const addToBasket = item => {
+//   return async dispatch => {
+//     dispatch(addToBasketRequest());
+//     try {
+//       const basketItem = {
+//         image: item.image,
+//         name: item.name,
+//         price: item.price,
+//         id: item.id,
+//       };
+
+//       const response = await axios.post(
+//         'https://66ced668901aab24841fc54d.mockapi.io/basket',
+//         basketItem
+//       );
+//       dispatch(addToBasketSuccess(response.data));
+//     } catch (error) {
+//       dispatch(addToBasketFailure(error.message));
+//     }
+//   };
+// };
 export const addToBasket = item => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     dispatch(addToBasketRequest());
+
+    // Получаем текущее состояние корзины из Redux
+    const state = getState();
+    const basket = state.basket; 
+
+   
+    const isItemInBasket = basket.some(
+      basketItem => basketItem.price === item.price
+    );
+
+    if (isItemInBasket) {
+      // console.log('Item already exists in the basket');
+      dispatch(addToBasketFailure('Item already exists in the basket'));
+      return;
+    }
+
     try {
+      
       const basketItem = {
         image: item.image,
         name: item.name,
@@ -84,17 +122,18 @@ export const addToBasket = item => {
         id: item.id,
       };
 
+      //  запрос на добавление нового товара
       const response = await axios.post(
         'https://66ced668901aab24841fc54d.mockapi.io/basket',
         basketItem
       );
+
       dispatch(addToBasketSuccess(response.data));
     } catch (error) {
       dispatch(addToBasketFailure(error.message));
     }
   };
 };
-
 // Получить из корзины
 export const fetchBasket = () => {
   return async dispatch => {

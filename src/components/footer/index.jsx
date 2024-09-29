@@ -1,8 +1,21 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import social_media from '../../images/sotialmadia';
 import styles from './styles.module.scss';
 import emailjs from '@emailjs/browser';
 import { useForm } from 'react-hook-form';
+import Input from '../../ui/imput';
+const emailRegister = {
+  name: 'email',
+  type: 'email',
+  placeholder: 'Enter your email',
+  validation: {
+    required: 'Email is required',
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+      message: 'Invalid email address',
+    },
+  },
+};
 function Footer() {
   const {
     register,
@@ -10,31 +23,9 @@ function Footer() {
     formState: { errors },
     reset,
   } = useForm();
-  // const [email, setEmail] = useState('')
-  //  function sendEmail ()  {
-  //    emailjs
-  //      .send(
-  //        'service_q3guaud', //Service ID из Email Services
-  //        'template_fq6qqeh', //  Template ID в email templates
-  //        { email }, // передаем email в шаблон
-  //        '1aoOkCMqEn0JwfkVO' // Public Key
-  //      )
-  //      .then(response => {
-  //        console.log('SUCCESS!', response.status, response.text);
-  //        setEmail('');
-  //      })
-  //      .catch(err => {
-  //        console.log('FAILED...', err);
-  //      });
-  //  };
-  // function onChange(e) {
-  //   if (e.key === 'Enter' && email) {
-  //     e.preventDefault();
-  //     sendEmail(); // oтправляем email
-  //   }
-  // }
  
-  function onSubmit (data){
+
+  function onSubmit(data) {
     emailjs
       .send(
         'service_q3guaud', //Service ID из Email Services
@@ -44,18 +35,18 @@ function Footer() {
       )
       .then(response => {
         console.log('SUCCESS!', response.status, response.text);
-        reset(); // Очищаем поле после успешной отправки
+        reset();
       })
       .catch(err => {
         console.log('FAILED...', err);
       });
-  };
- function handleKeyPress ( e) {
-   if (e.key === 'Enter') {
-     e.preventDefault(); 
-     handleSubmit(onSubmit)(); 
-   }
- };
+  }
+  function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit(onSubmit)();
+    }
+  }
   return (
     <footer className={styles.footerContainer}>
       <ul className={styles.privacyContainer}>
@@ -77,22 +68,18 @@ function Footer() {
         </li>
         <li>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {errors.email && (
-              <p style={{ color: '#eb1052', opacity: '0.5',fontWeight:"600" }}>
-                {errors.email.message}
+            {errors[emailRegister.name] && (
+              <p
+                style={{ color: '#eb1052', opacity: '0.5', fontWeight: '600' }}
+              >
+                {errors[emailRegister.name].message}
               </p>
             )}
-            <input
-              type="email"
-              placeholder="Enter your email"
-              {...register('email', {
-                required: true,
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
-                },
-              })}
+            <Input
+              type={emailRegister.type}
+              placeholder={emailRegister.placeholder}
               onKeyDown={handleKeyPress}
+              {...register(emailRegister.name, emailRegister.validation)}
               required
             />
           </form>

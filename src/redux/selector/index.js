@@ -17,3 +17,8 @@ export const selectError = createSelector(
   [selectShop],
   shop => shop.error
 );
+
+// export const selectBasket = createSelector(
+//   [selectShop],
+//   shop => shop.basket
+// );
